@@ -378,7 +378,7 @@
             span.onmouseenter = () => { span.style.background = "rgba(255,255,255,0.1)"; span.style.transform = "scale(1.2)"; };
             span.onmouseleave = () => { span.style.background = "transparent"; span.style.transform = "scale(1)"; };
             span.onclick = () => {
-                insertEmoji(e);
+                insertEmoji(e, isQuick);
                 addToRecent(e);
                 renderQuickPicks();
                 if (currentTab === 'recent') renderGrid();
@@ -418,7 +418,7 @@
             }
         }
 
-        function insertEmoji(e) {
+        function insertEmoji(e, closeAfter = false) {
             const start = input.selectionStart;
             const end = input.selectionEnd;
             const val = input.value;
@@ -427,7 +427,7 @@
             input.dispatchEvent(new Event('input', { bubbles: true }));
             input.focus();
             input.selectionStart = input.selectionEnd = start + e.length;
-            popup.style.display = "none";
+            if (closeAfter) popup.style.display = "none";
         }
 
         // Set initial active tab styling
