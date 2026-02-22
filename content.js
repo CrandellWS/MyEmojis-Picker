@@ -214,7 +214,7 @@
         });
 
         const titleEl = document.createElement("span");
-        titleEl.textContent = "🎰 Slot Emojis";
+        titleEl.textContent = "🎰 MyEmojis";
         Object.assign(titleEl.style, { fontSize: "13px", fontWeight: "700", color: "#f0c040", letterSpacing: "0.3px" });
 
         const closeBtn = document.createElement("span");

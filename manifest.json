@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "MyPrize Slot Emoji Picker",
-  "description": "Adds a slot-themed emoji picker to the MyPrize chat input for faster, more fun reactions.",
-  "version": "1.0.0",
+  "name": "MyEmojis Picker",
+  "description": "Adds a slot-themed emoji picker to MyPrize.us chat. Quick picks, tabbed categories, smart recents — all local, no tracking.",
+  "version": "2.0.0",
   "permissions": [],
   "host_permissions": ["https://myprize.us/*"],
   "content_scripts": [
