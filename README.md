@@ -1,158 +1,80 @@
-# MyPrize Slot Emoji Picker - Chrome Extension
+# 🎰 MyEmojis Picker
 
-A Chrome extension that adds a slot-themed emoji picker to the MyPrize chat input for faster, more expressive reactions during live slot sessions.
+> A free Chrome extension that adds a slot-themed emoji picker to [MyPrize.us](https://myprize.us/invite/GWASlots) chat. Made for the **gwa_slots** community.
 
-## Features
+[![Chrome Web Store](https://img.shields.io/badge/Chrome%20Web%20Store-Published-brightgreen)](https://chromewebstore.google.com/detail/myprize-slot-emoji-picker/bbakpgfkeaimoipknjlddilhkafgfflm)
+[![GitHub Release](https://img.shields.io/github/v/release/CrandellWS/MyEmojis-Picker)](https://github.com/CrandellWS/MyEmojis-Picker/releases/latest)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-- **Slot-Themed Emoji Collection**: 60+ curated emojis perfect for slot streaming
-- **One-Click Access**: Click the 🎰 button in the chat input to open the picker
-- **Categories Include**:
-  - 🔥 Hype & Wins (🔥💯🎉🥳🚀💥⚡🎰💎💵💰🤑)
-  - 😱 Reactions (😱🤯🤩😍🙌🫡👑🏆)
-  - 😂 Humor (😂🤣😭💀🤡😵‍💫)
-  - 🙏 Hope & Luck (🙏🤞😬😔😮‍🗨😓)
-  - 😡 Tilt & Salt (😡🤬😤🧂👎🤦😒)
-  - 👀 Misc (👀😳🫣👏🧍🍻🍺❤️🤝🔄✌️)
-  - 🎲 Gambling (🎲🪙💸🧨🔔⭐7️⃣🍒🍀)
-
-## Installation
-
-### From Chrome Web Store (Recommended - Coming Soon)
-1. Visit the Chrome Web Store
-2. Search for "MyPrize Slot Emoji Picker"
-3. Click "Add to Chrome"
-
-### Local Development Installation
-1. Download or clone this repository
-2. Open Chrome and navigate to `chrome://extensions/`
-3. Enable "Developer mode" (toggle in top right)
-4. Click "Load unpacked"
-5. Select the `myprize-emoji-picker` folder
-6. Navigate to https://myprize.us and enjoy!
-
-## Usage
-
-1. Go to https://myprize.us
-2. Open the chat
-3. Look for the 🎰 button on the left side of the chat input
-4. Click it to open the emoji picker
-5. Click any emoji to insert it into your message
-6. Click outside or on the 🎰 button again to close the picker
-
-## Files Included
-
-### Extension Files (Required for Publishing)
-- `manifest.json` - Extension configuration
-- `content.js` - Main functionality script
-- `icon16.png` - 16×16 icon
-- `icon48.png` - 48×48 icon
-- `icon128.png` - 128×128 icon
-
-### Documentation & Build Files
-- `README.md` - This file
-- `STORE_LISTING.txt` - Chrome Web Store listing details
-- `generate_icons.py` - Icon generator script (not included in ZIP)
-
-## Publishing to Chrome Web Store
-
-### Step 1: Create ZIP Package
-
-Run this command from the extension directory:
-
-```bash
-cd /home/aiuser/projects/myprize-emoji-picker
-zip myprize-emoji-picker.zip manifest.json content.js icon16.png icon48.png icon128.png
-```
-
-**IMPORTANT**: Only include the 5 files listed above. Do NOT include:
-- README.md
-- STORE_LISTING.txt
-- generate_icons.py
-- .git folder
-- Any other files
-
-### Step 2: Prepare Screenshots
-
-Take 1-3 screenshots showing the extension in action:
-- Go to https://myprize.us
-- Open the chat
-- Show the 🎰 button
-- Click it to show the emoji popup
-- Save as PNG (1280×800 recommended)
-
-### Step 3: Submit to Chrome Web Store
-
-1. Go to: https://chrome.google.com/webstore/devconsole
-2. Click "Add new item"
-3. Upload `myprize-emoji-picker.zip`
-4. Fill in store listing (see `STORE_LISTING.txt` for copy-paste ready content)
-5. Upload screenshots
-6. Submit for review
-
-**Expected Approval Time**: 10-60 minutes for simple extensions like this
-
-See `STORE_LISTING.txt` for complete publishing details including:
-- Short description (132 chars)
-- Long description
-- Privacy policy
-- Category recommendations
-
-## Privacy
-
-This extension:
-- ✅ Does NOT collect any data
-- ✅ Does NOT send data to external servers
-- ✅ Only runs on https://myprize.us
-- ✅ Requires zero permissions
-- ✅ All functionality is local
-
-## Technical Details
-
-- **Manifest Version**: 3 (latest Chrome standard)
-- **Permissions**: None required
-- **Host Permissions**: `https://myprize.us/*` only
-- **Content Script**: Injected at `document_idle`
-- **File Size**: ~3KB total (extremely lightweight)
-
-## Development
-
-### Rebuilding Icons
-
-If you need to regenerate the icons:
-
-```bash
-python3 generate_icons.py
-```
-
-Requires: `pip3 install Pillow`
-
-### Testing Locally
-
-1. Make changes to `content.js`
-2. Go to `chrome://extensions/`
-3. Click the refresh icon on the extension card
-4. Reload https://myprize.us
-5. Test your changes
-
-## Support
-
-For issues or feature requests, please contact the developer.
-
-## Version History
-
-### v1.0.0 (2025-12-30)
-- Initial release
-- 60+ slot-themed emojis
-- Clean, simple interface
-- Zero permissions required
-- Fast and lightweight
-
-## Credits
-
-Created for the MyPrize slot streaming community.
-
-Built with ❤️ for slot streamers who love to express themselves in chat.
+**[🌐 Landing Page](https://crandellws.github.io/MyEmojis-Picker/) · [🧩 Add to Chrome](https://chromewebstore.google.com/detail/myprize-slot-emoji-picker/bbakpgfkeaimoipknjlddilhkafgfflm) · [⬇️ Download Zip](https://github.com/CrandellWS/MyEmojis-Picker/releases/latest/download/myprize-emoji-picker.zip) · [🎰 Join MyPrize](https://myprize.us/invite/GWASlots)**
 
 ---
 
-**Ready to publish?** See `STORE_LISTING.txt` for complete publishing instructions.
+## Features
+
+- **⚡ Quick Picks** — Your 5 most recently used emojis always visible at the top, auto-closes on select
+- **⏱ Smart Recents** — 5×5 grid of your 25 most used emojis as the default view, preloaded with the best defaults
+- **🗂️ 6 Tabs** — Recent · 🏆 Win · 😭 Loss · 🎄 Seasonal · 😂 Feels · 🖨️ Printer
+- **🔍 Keyword Search** — Type `fire`, `money`, `unicorn`, `salty`, `lucky` and instantly filter
+- **🧠 Smart Memory** — localStorage only, no servers, picks float to top automatically
+- **⌨️ Keyboard Friendly** — `Escape` to close, click outside to dismiss
+- **🖨️ Printer Tab** — Because we're printing money out here: 🖨️💸💵🤑🪙💎🎰🦄
+
+## Install
+
+### Option 1 — Chrome Web Store (Recommended)
+
+[**Add to Chrome →**](https://chromewebstore.google.com/detail/myprize-slot-emoji-picker/bbakpgfkeaimoipknjlddilhkafgfflm)
+
+One click, auto-updates, done.
+
+### Option 2 — Load Unpacked (Manual)
+
+1. [Download the zip](https://github.com/CrandellWS/MyEmojis-Picker/releases/latest/download/myprize-emoji-picker.zip) and unzip it
+2. Go to `chrome://extensions` and enable **Developer mode**
+3. Click **Load unpacked** and select the unzipped folder
+4. To update: replace folder contents and hit the refresh icon on the extension card
+
+## Usage
+
+1. Go to [myprize.us/invite/GWASlots](https://myprize.us/invite/GWASlots)
+2. Open chat — look for the **🎰** button in the input
+3. Click it to open the picker
+4. Quick picks auto-close · grid stays open for multi-select
+5. `Escape` or click outside to dismiss
+
+## Privacy & Safety
+
+| | |
+|---|---|
+| 🚫 No servers | Never makes any network requests |
+| 🗄️ Local only | Recents saved in your browser's `localStorage` |
+| 👤 No account | No login, no email, nothing |
+| 📖 Open source | Every line of code is right here to read |
+| 🎯 Single-site | Only activates on `myprize.us` |
+| 🧹 Tiny | Under 8KB total, zero dependencies |
+
+## Development
+
+```bash
+# Edit content.js, then reload at chrome://extensions
+# Rebuild zip for store upload:
+python3 create_zip.py
+```
+
+## Version History
+
+### v2.0.0
+- Tabs: Recent · Win · Loss · Seasonal · Feels · Printer
+- Quick picks strip (top 5, auto-closes on select)
+- 5×5 recent grid default view with smart preload
+- Keyword search across all categories
+- Grid stays open for multi-select
+- Fixed textarea selector for updated MyPrize DOM
+
+### v1.0.0
+- Initial release — basic emoji popup
+
+---
+
+Made with love for the [gwa_slots](https://kick.com/gwa_slots) community. Not on MyPrize yet? [Join free here](https://myprize.us/invite/GWASlots).
