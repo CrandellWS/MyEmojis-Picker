@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "MyPrize Slot Emoji Picker",
+  "description": "Adds a slot-themed emoji picker to the MyPrize chat input for faster, more fun reactions.",
+  "version": "1.0.0",
+  "permissions": [],
+  "host_permissions": ["https://myprize.us/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://myprize.us/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}

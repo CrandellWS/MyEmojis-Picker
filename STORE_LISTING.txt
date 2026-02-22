@@ -1,0 +1,139 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║           CHROME WEB STORE LISTING INFORMATION                               ║
+║           MyPrize Slot Emoji Picker Extension                                ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+═══════════════════════════════════════════════════════════════════════════════
+📝 SHORT DESCRIPTION (max 132 characters)
+═══════════════════════════════════════════════════════════════════════════════
+
+Adds a fast slot-themed emoji picker to MyPrize chat. Celebrate wins, react to bonus buys, hype the room, and play with style!
+
+
+═══════════════════════════════════════════════════════════════════════════════
+📄 LONG DESCRIPTION (detailed)
+═══════════════════════════════════════════════════════════════════════════════
+
+This extension adds a custom slot-themed emoji picker directly into the MyPrize chat input. Perfect for reacting during live slot sessions, bonus buys, jackpots, tilt moments, and community hype. No setup required—just install and enjoy.
+
+Features:
+• Slot-themed emoji picker (🎰 🎉🔥💀😱💰)
+• One-click reactions for winners, tilters, and hype moments
+• Clean, simple, fast
+• Injects only on https://myprize.us
+• Zero permissions required
+• No data collection of any kind
+
+Made for players who want to express themselves in chat the way slot streams were meant to be enjoyed.
+
+
+═══════════════════════════════════════════════════════════════════════════════
+🏷️ CATEGORY
+═══════════════════════════════════════════════════════════════════════════════
+
+Choose one of:
+  ✓ Social & Communication (RECOMMENDED)
+  ✓ Productivity
+
+
+═══════════════════════════════════════════════════════════════════════════════
+🔒 PRIVACY POLICY
+═══════════════════════════════════════════════════════════════════════════════
+
+This extension does not collect, store, transmit, or process any user data.
+All functionality occurs locally inside the user's browser. No information is
+sent to external servers. This extension modifies only the appearance of the
+MyPrize chat input by adding an emoji picker.
+
+
+═══════════════════════════════════════════════════════════════════════════════
+📸 SCREENSHOTS REQUIRED (1-3 screenshots)
+═══════════════════════════════════════════════════════════════════════════════
+
+Requirements:
+  • Dimensions: 1280×800 or 640×400 minimum
+  • Format: PNG or JPEG
+  • Show the extension in action
+
+How to capture:
+  1. Go to https://myprize.us
+  2. Open the chat
+  3. Show the 🎰 button visible in the chat input
+  4. Optionally click it to show the emoji popup
+  5. Take screenshot
+  6. Save as: screenshot1.png, screenshot2.png, etc.
+
+
+═══════════════════════════════════════════════════════════════════════════════
+🎨 ICONS (INCLUDED IN PACKAGE)
+═══════════════════════════════════════════════════════════════════════════════
+
+✓ icon16.png  - 16×16 pixels
+✓ icon48.png  - 48×48 pixels
+✓ icon128.png - 128×128 pixels
+
+All icons are already generated and included in the extension folder.
+
+
+═══════════════════════════════════════════════════════════════════════════════
+📦 PUBLISHING STEPS
+═══════════════════════════════════════════════════════════════════════════════
+
+1. CREATE ZIP FILE
+   ────────────────
+   Navigate to: /home/aiuser/projects/myprize-emoji-picker/
+
+   Create ZIP containing ONLY these files:
+     • manifest.json
+     • content.js
+     • icon16.png
+     • icon48.png
+     • icon128.png
+
+   DO NOT include:
+     • generate_icons.py
+     • STORE_LISTING.txt
+     • README.md
+     • Any other files
+
+   Command to create ZIP:
+     cd /home/aiuser/projects/myprize-emoji-picker
+     zip myprize-emoji-picker.zip manifest.json content.js icon16.png icon48.png icon128.png
+
+
+2. GO TO CHROME WEB STORE DEVELOPER CONSOLE
+   ─────────────────────────────────────────
+   URL: https://chrome.google.com/webstore/devconsole
+
+   Note: Requires one-time $5 developer registration fee if not already registered
+
+
+3. UPLOAD EXTENSION
+   ─────────────────
+   • Click "Add new item"
+   • Upload myprize-emoji-picker.zip
+   • Fill in store listing details (see sections above)
+   • Upload 1-3 screenshots
+   • Paste privacy policy
+   • Select category
+
+
+4. SUBMIT FOR REVIEW
+   ──────────────────
+   • Click "Submit for review"
+   • Approval typically takes 10-60 minutes for simple extensions
+
+
+═══════════════════════════════════════════════════════════════════════════════
+✨ ADDITIONAL NOTES
+═══════════════════════════════════════════════════════════════════════════════
+
+• This extension is minimal and clean - should pass review quickly
+• No special permissions required
+• Only runs on https://myprize.us domain
+• Zero data collection
+• No external API calls
+• No tracking or analytics
+
+Version: 1.0.0
+Last Updated: 2025-12-30
