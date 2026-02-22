@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎰 GWA Slot Emoji Picker — MyPrize Chat Extension</title>
+  <meta name="description" content="A free, safe Chrome extension that adds a slot-themed emoji picker to MyPrize.us chat. No tracking, no servers — pure fun." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #f0c040;
+      --gold-dim: #c89a20;
+      --bg: #0b0f1a;
+      --surface: #111827;
+      --surface2: #1a2236;
+      --border: rgba(255,255,255,0.08);
+      --text: #e8eaf0;
+      --muted: #6b7280;
+      --green: #22c55e;
+      --red: #ef4444;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      text-align: center;
+      padding: 80px 20px 60px;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(240,192,64,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .badge {
+      display: inline-block;
+      background: rgba(240,192,64,0.1);
+      border: 1px solid rgba(240,192,64,0.3);
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 18px;
+      background: linear-gradient(135deg, #fff 0%, var(--gold) 60%, #ff9f43 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: #9ca3af;
+      max-width: 580px;
+      margin: 0 auto 36px;
+    }
+    .btn-group { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 26px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold), #ff9f43);
+      color: #111;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(240,192,64,0.35); }
+    .btn-secondary {
+      background: var(--surface2);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.2); background: #243050; }
+
+    /* ── PREVIEW MOCKUP ── */
+    .mockup-wrap {
+      max-width: 360px;
+      margin: 50px auto 0;
+    }
+    .mockup {
+      background: #111827;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.6);
+      font-family: 'Inter', sans-serif;
+    }
+    .mockup-header {
+      background: rgba(0,0,0,0.3);
+      padding: 10px 14px 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .mockup-title { font-size: 13px; font-weight: 700; color: var(--gold); margin-bottom: 7px; }
+    .mockup-search {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 7px;
+      color: #555;
+      padding: 5px 10px;
+      font-size: 11px;
+      width: 100%;
+    }
+    .mockup-quick { padding: 7px 12px; border-bottom: 1px solid rgba(255,255,255,0.07); background: rgba(240,192,64,0.03); }
+    .mockup-quick-label { font-size: 9px; color: #555; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+    .mockup-quick-row { display: flex; gap: 4px; }
+    .mockup-quick-row span { font-size: 22px; padding: 3px 5px; border-radius: 6px; background: rgba(255,255,255,0.07); }
+    .mockup-tabs { display: flex; border-bottom: 1px solid rgba(255,255,255,0.08); background: rgba(0,0,0,0.15); }
+    .mockup-tab { padding: 6px 10px; font-size: 14px; border-bottom: 2px solid transparent; }
+    .mockup-tab.active { border-bottom-color: var(--gold); }
+    .mockup-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1px;
+      padding: 6px 8px 10px;
+      font-size: 22px;
+      text-align: center;
+    }
+    .mockup-grid span { padding: 5px; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+    .mockup-grid span:hover { background: rgba(255,255,255,0.1); }
+    .mockup-grid span.hi { background: rgba(255,255,255,0.08); }
+
+    /* ── SECTION WRAPPER ── */
+    .section { padding: 70px 20px; }
+    .section-inner { max-width: 1000px; margin: 0 auto; }
+    .section-tag { font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .section-title { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800; margin-bottom: 14px; }
+    .section-sub { font-size: 1rem; color: var(--muted); max-width: 560px; }
+
+    /* ── SAFETY ── */
+    .safety { background: var(--surface); }
+    .safety-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 40px; }
+    .safety-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px;
+    }
+    .safety-card .icon { font-size: 28px; margin-bottom: 12px; }
+    .safety-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+    .safety-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .check { color: var(--green); font-weight: 700; }
+    .cross { color: var(--red); font-weight: 700; }
+
+    /* ── FEATURES ── */
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 40px; }
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .feature-card:hover { border-color: rgba(240,192,64,0.3); transform: translateY(-3px); }
+    .feature-card .icon { font-size: 32px; margin-bottom: 14px; }
+    .feature-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+    .feature-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* ── CATEGORIES ── */
+    .cats { background: var(--surface); }
+    .cats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 40px; }
+    .cat-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .cat-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 10px; }
+    .cat-emojis { font-size: 22px; line-height: 1.8; word-break: break-all; }
+
+    /* ── INSTALL ── */
+    .steps { margin-top: 40px; display: flex; flex-direction: column; gap: 14px; }
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 22px;
+    }
+    .step-num {
+      background: linear-gradient(135deg, var(--gold), #ff9f43);
+      color: #111;
+      font-weight: 800;
+      font-size: 15px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-body h4 { font-size: 15px; font-weight: 700; margin-bottom: 3px; }
+    .step-body p { font-size: 13px; color: var(--muted); }
+    .step-body code {
+      background: rgba(255,255,255,0.08);
+      border-radius: 5px;
+      padding: 1px 6px;
+      font-family: monospace;
+      font-size: 12px;
+      color: var(--gold);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    footer a { color: var(--gold); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .footer-logo { font-size: 28px; margin-bottom: 10px; }
+
+    /* ── DIVIDER ── */
+    .divider { border: none; border-top: 1px solid var(--border); }
+
+    @media (max-width: 600px) {
+      .hero { padding: 60px 16px 40px; }
+      .section { padding: 50px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="badge">Free Chrome Extension · MyPrize.us</div>
+  <h1>🎰 The Slot Chat<br/>Emoji Picker</h1>
+  <p>Made for the <strong style="color:#fff">gwa_slots</strong> community. Drop the perfect reaction in MyPrize chat — wins, losses, money printing, unicorns — instantly.</p>
+  <div class="btn-group">
+    <a href="https://github.com/williamcrandell/myprize-emoji-picker/releases/latest/download/myprize-emoji-picker.zip" class="btn btn-primary">⬇️ Download Extension</a>
+    <a href="https://github.com/williamcrandell/myprize-emoji-picker" class="btn btn-secondary">📂 View Source</a>
+  </div>
+
+  <!-- UI MOCKUP -->
+  <div class="mockup-wrap">
+    <div class="mockup">
+      <div class="mockup-header">
+        <div class="mockup-title">🎰 Slot Emojis</div>
+        <div class="mockup-search">🔍  Search... (fire, money, unicorn...)</div>
+      </div>
+      <div class="mockup-quick">
+        <div class="mockup-quick-label">⚡ Quick picks</div>
+        <div class="mockup-quick-row">
+          <span>🔥</span><span>💯</span><span>🎰</span><span>🖨️</span><span>🦄</span>
+        </div>
+      </div>
+      <div class="mockup-tabs">
+        <div class="mockup-tab active">⏱</div>
+        <div class="mockup-tab">🏆</div>
+        <div class="mockup-tab">😭</div>
+        <div class="mockup-tab">🎄</div>
+        <div class="mockup-tab">😂</div>
+        <div class="mockup-tab">🖨️</div>
+      </div>
+      <div class="mockup-grid">
+        <span class="hi">🔥</span><span>💯</span><span>🎉</span><span>🥳</span><span>🎰</span>
+        <span>💎</span><span class="hi">💵</span><span>🤑</span><span>🏆</span><span>👑</span>
+        <span>😱</span><span>🤯</span><span>🙌</span><span class="hi">🖨️</span><span>💸</span>
+        <span>😂</span><span>💀</span><span>🤣</span><span>😭</span><span>🤦</span>
+        <span class="hi">🦄</span><span>✨</span><span>🌈</span><span>🙏</span><span>👀</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- SAFETY -->
+<section class="section safety">
+  <div class="section-inner">
+    <div class="section-tag">🔒 Privacy & Safety</div>
+    <h2 class="section-title">100% safe. Zero tracking.</h2>
+    <p class="section-sub">This extension is fully open source. You can read every single line of code. There is nothing hiding.</p>
+    <div class="safety-grid">
+      <div class="safety-card">
+        <div class="icon">🚫</div>
+        <h3><span class="cross">✗</span> No servers</h3>
+        <p>The extension never makes any network requests. It does not contact any server — ours or anyone else's. Ever.</p>
+      </div>
+      <div class="safety-card">
+        <div class="icon">🗄️</div>
+        <h3><span class="check">✓</span> Local storage only</h3>
+        <p>Your recently used emojis are saved in your browser's <code>localStorage</code> — on your machine, in your browser, nowhere else.</p>
+      </div>
+      <div class="safety-card">
+        <div class="icon">👤</div>
+        <h3><span class="cross">✗</span> No account needed</h3>
+        <p>No sign up, no login, no email, no name. Install and use. That's it.</p>
+      </div>
+      <div class="safety-card">
+        <div class="icon">📖</div>
+        <h3><span class="check">✓</span> Open source</h3>
+        <p>Every line of code is public on GitHub. Read it, fork it, audit it. Nothing is obfuscated or hidden.</p>
+      </div>
+      <div class="safety-card">
+        <div class="icon">🎯</div>
+        <h3><span class="check">✓</span> Single-site only</h3>
+        <p>The extension only activates on <strong>myprize.us</strong>. It does not run on any other website.</p>
+      </div>
+      <div class="safety-card">
+        <div class="icon">🧹</div>
+        <h3><span class="check">✓</span> Tiny footprint</h3>
+        <p>Under 8KB total. One JavaScript file. No dependencies, no frameworks, no bloat.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- FEATURES -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-tag">✨ Features</div>
+    <h2 class="section-title">Built for slot chat.</h2>
+    <p class="section-sub">Every feature is designed around how you actually chat during a stream.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="icon">⚡</div>
+        <h3>Quick Picks</h3>
+        <p>Your 5 most recently used emojis sit right at the top, always ready. Most-used first, always.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">⏱</div>
+        <h3>5×5 Recent Grid</h3>
+        <p>The default view shows your 25 most used emojis in a clean grid. Brand new installs get a curated starter set automatically.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🗂️</div>
+        <h3>6 Emoji Tabs</h3>
+        <p>Organized by vibe — Recent, Win, Loss, Seasonal, Feels, and Printer. Find the right energy in one click.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🔍</div>
+        <h3>Keyword Search</h3>
+        <p>Type <em>fire</em>, <em>money</em>, <em>unicorn</em>, <em>salty</em>, <em>lucky</em> and instantly see matching emojis across all categories.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🧠</div>
+        <h3>Smart Memory</h3>
+        <p>Every emoji you pick moves to the top of your recents. Your most-used emojis naturally float to the front over time.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">⌨️</div>
+        <h3>Keyboard Friendly</h3>
+        <p>Press <kbd style="background:rgba(255,255,255,0.1);padding:1px 6px;border-radius:4px;font-size:12px;">Escape</kbd> to close the picker and return focus to the chat box. Click anywhere outside to dismiss.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- CATEGORIES -->
+<section class="section cats">
+  <div class="section-inner">
+    <div class="section-tag">🗂️ Emoji Categories</div>
+    <h2 class="section-title">Every vibe covered.</h2>
+    <p class="section-sub">Curated specifically for slot streaming chat — the emotions, the reactions, the wins.</p>
+    <div class="cats-grid">
+      <div class="cat-card">
+        <h3>🏆 Win — Big energy, big wins</h3>
+        <div class="cat-emojis">🔥💯🎉🥳🚀💥⚡💎💵💰🤑🏆👑😱🤯🤩😍🙌🎊🥂🍾💫✨🌟⭐🎆🎇🪄🎰</div>
+      </div>
+      <div class="cat-card">
+        <h3>😭 Loss — Tough luck reactions</h3>
+        <div class="cat-emojis">😭😔😤😒😡🤬🤦😮‍💨😓💀🤡😵‍💫🧂👎😬😩😢🫠🙃😑💔🫤🪦😰🤕😞😟</div>
+      </div>
+      <div class="cat-card">
+        <h3>🎄 Seasonal — Holiday vibes</h3>
+        <div class="cat-emojis">🎃🎄🎅🤶🎁🎊🎆🎇🌸🍂🌻🌈🌊🏖️❄️⛄🎋🍀☘️🌺🦃🥧🌵🎑🎍🎐🎏🏮🥚🐣</div>
+      </div>
+      <div class="cat-card">
+        <h3>😂 Feels — General reactions</h3>
+        <div class="cat-emojis">😂🤣💀🤯😍🥲😅😊🫶❤️👀😳🫣👏🤝✌️🙌🫡🤞🙏🧍🍻🍺🔄😈🤭🫢😏🥹😬</div>
+      </div>
+      <div class="cat-card">
+        <h3>🖨️ Printer — Money & casino</h3>
+        <div class="cat-emojis">🖨️💸💵💴💶💷💰🤑💲💳🪙💎🎰🃏🎲7️⃣🍒🍀🏦🔑🦄🌈✨💫🎠🎡🎢🎪🎭🏅</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- INSTALL -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-tag">🚀 Install</div>
+    <h2 class="section-title">Up in 60 seconds.</h2>
+    <p class="section-sub">No Chrome Web Store account needed. Load it directly from the downloaded folder.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>Download the extension</h4>
+          <p>Click the <strong>Download Extension</strong> button above and save the zip file. Unzip it anywhere on your computer.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Open Chrome Extensions</h4>
+          <p>In Chrome, go to <code>chrome://extensions</code> and turn on <strong>Developer mode</strong> (toggle in the top right).</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>Load the folder</h4>
+          <p>Click <strong>Load unpacked</strong> and select the unzipped folder. The extension appears instantly.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h4>Head to MyPrize.us</h4>
+          <p>Open the chat. You'll see a <strong>🎰</strong> button in the chat input. Click it and start reacting.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h4>Updating the extension</h4>
+          <p>When a new version is released, replace the folder contents and click the <strong>refresh icon</strong> on the extension card at <code>chrome://extensions</code>. Done.</p>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:30px; text-align:center;">
+      <a href="https://github.com/williamcrandell/myprize-emoji-picker/releases/latest/download/myprize-emoji-picker.zip" class="btn btn-primary" style="font-size:16px; padding:16px 36px;">⬇️ Download Free Extension</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">🎰</div>
+  <p>Made with love for the <a href="https://kick.com/gwa_slots" target="_blank">gwa_slots</a> community &nbsp;·&nbsp; <a href="https://github.com/williamcrandell/myprize-emoji-picker" target="_blank">GitHub</a> &nbsp;·&nbsp; Free &amp; open source forever</p>
+  <p style="margin-top:8px; font-size:11px; color:#374151;">No tracking · No servers · No nonsense</p>
+</footer>
+
+</body>
+</html>
